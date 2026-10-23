@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>ST国家試験対策ドリル｜個人専用演習 ②</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #FFFDF8; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Meiryo', sans-serif; color: #111111; }
+  #loaderScreen {
+    position: fixed; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; background: #FFFDF8; z-index: 9999; padding: 20px;
+  }
+  .loader-card {
+    background: #FFFFFF; border: 3px solid #FF8247; border-radius: 16px;
+    padding: 30px 36px; max-width: 480px; width: 100%; text-align: center;
+    box-shadow: 0 10px 28px rgba(232, 85, 53, 0.16);
+  }
+  .loader-title { font-size: 19px; font-weight: 900; color: #E85535; margin-bottom: 12px; }
+  .loader-msg { font-size: 14.5px; color: #5C4940; font-weight: 700; margin-bottom: 16px; line-height: 1.6; }
+  .prog-bar { width: 100%; height: 10px; background: #FFF3EA; border-radius: 99px; overflow: hidden; margin-bottom: 12px; }
+  .prog-fill { height: 100%; width: 15%; background: linear-gradient(90deg, #FF6542, #FFB340); transition: width 0.25s ease; }
+  .key-form { display: none; margin-top: 14px; gap: 8px; }
+  .key-input { flex: 1; padding: 9px 12px; border: 1.5px solid #F3D1C0; border-radius: 6px; font-size: 14px; }
+  .key-btn { padding: 9px 16px; background: #E85535; color: #FFF; font-weight: 800; border: none; border-radius: 6px; cursor: pointer; }
+  #appFrame { width: 100%; height: 100%; border: none; display: none; }
+</style>
+</head>
+<body>
+<div id="loaderScreen">
+  <div class="loader-card">
+    <div class="loader-title">🌻 ST国家試験対策ドリル（個人専用 UI ②）</div>
+    <div class="loader-msg" id="statusMsg">暗号化データを検証・展開しています（約1秒）...</div>
+    <div class="prog-bar" id="progWrap"><div class="prog-fill" id="progFill"></div></div>
+    <form class="key-form" id="keyForm" onsubmit="event.preventDefault(); retryWithManualKey();">
+      <input type="password" id="manualKeyInput" class="key-input" placeholder="アクセスキーを入力">
+      <button type="submit" class="key-btn">開く</button>
+    </form>
+  </div>
+</div>
+<iframe id="appFrame" title="ST Drill Workspace"></iframe>
+<script>
+window.__DRILL_PROFILE_ID = "student_solo_2";
+window.__DRILL_PROFILE_SUB = "永見ゼミ 国試対策・実践演習システム（個人専用 UI ②）";
+window.__DRILL_PROFILE_BADGE = "👤 個人専用 ②";
+window.__DRILL_PROFILE_THEME = "mint";
+function b64UrlToBytes(b64url) {
+  const pad = '='.repeat((4 - (b64url.length % 4)) % 4);
+  const b64 = (b64url + pad).split('-').join('+').split('_').join('/');
+  const raw = atob(b64);
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+  return out;
+}
+async function gunzipBytes(compressedBytes) {
+  const ds = new DecompressionStream('gzip');
+  const stream = new Blob([compressedBytes]).stream().pipeThrough(ds);
+  return new Response(stream).text();
+}
+async function decryptAsset(cryptoKey, encBuffer) {
+  const bytes = new Uint8Array(encBuffer);
+  const iv = bytes.slice(0, 12);
+  const ciphertext = bytes.slice(12);
+  const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, cryptoKey, ciphertext);
+  return new Uint8Array(plainBuf);
+}
+async function bootWithKey(keyStr) {
+  const statusEl = document.getElementById('statusMsg');
+  const progFill = document.getElementById('progFill');
+  const keyForm = document.getElementById('keyForm');
+  try {
+    keyForm.style.display = 'none';
+    progFill.style.width = '25%';
+    statusEl.textContent = '暗号化アセットを取得しています...';
+    const keyBytes = b64UrlToBytes(keyStr.trim());
+    const cryptoKey = await crypto.subtle.importKey('raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']);
+    const [appRes, dataRes] = await Promise.all([
+      fetch('./app.enc', { cache: 'force-cache' }),
+      fetch('./data.enc', { cache: 'force-cache' })
+    ]);
+    if (!appRes.ok || !dataRes.ok) throw new Error('暗号化ファイルの取得に失敗しました');
+    progFill.style.width = '60%';
+    statusEl.textContent = '全21領域・7,587問データを復号・展開しています...';
+    const [appEncBuf, dataEncBuf] = await Promise.all([appRes.arrayBuffer(), dataRes.arrayBuffer()]);
+    const [appGzBytes, dataGzBytes] = await Promise.all([
+      decryptAsset(cryptoKey, appEncBuf),
+      decryptAsset(cryptoKey, dataEncBuf)
+    ]);
+    progFill.style.width = '85%';
+    const [uiHtml, datasetJsonStr] = await Promise.all([
+      gunzipBytes(appGzBytes),
+      gunzipBytes(dataGzBytes)
+    ]);
+    window.__PRELOADED_DRILL_DATA = JSON.parse(datasetJsonStr);
+    progFill.style.width = '100%';
+    const frame = document.getElementById('appFrame');
+    frame.style.display = 'block';
+    frame.srcdoc = uiHtml;
+    frame.onload = function() {
+      document.getElementById('loaderScreen').style.display = 'none';
+    };
+  } catch (err) {
+    document.getElementById('progWrap').style.display = 'none';
+    statusEl.textContent = '専用リンクのキーが確認できませんでした。配布された完全URL（#以降を含むリンク）から開いてください。';
+    keyForm.style.display = 'flex';
+  }
+}
+function retryWithManualKey() {
+  const val = document.getElementById('manualKeyInput').value.trim();
+  if (!val) return;
+  location.hash = val;
+  document.getElementById('progWrap').style.display = 'block';
+  bootWithKey(val);
+}
+window.addEventListener('DOMContentLoaded', function() {
+  const rawHash = (location.hash || '').slice(1).trim();
+  if (!rawHash) {
+    document.getElementById('progWrap').style.display = 'none';
+    document.getElementById('statusMsg').textContent = '配布された専用リンク（#以降を含むURL）からアクセスしてください。';
+    document.getElementById('keyForm').style.display = 'flex';
+    return;
+  }
+  bootWithKey(rawHash);
+});
+</script>
+</body>
+</html>
