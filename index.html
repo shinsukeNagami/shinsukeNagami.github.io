@@ -7,15 +7,15 @@
 <meta name="description" content="Shinsuke Nagami, Ph.D. Professor, School of Rehabilitation Sciences, Health Sciences University of Hokkaido. Dysphagia rehabilitation, motor speech disorders, biosignal and acoustic analysis, LLM-based clinical workflows.">
 <style>
   :root{
-    --ink:#1a2233; --sub:#4a5568; --accent:#1f5f8b; --accent2:#2a7ab0;
-    --line:#dde3ec; --bg:#ffffff; --bg2:#f5f7fa; --chip:#eef3f8;
+    --ink:#171717; --sub:#514a43; --accent:#72533d; --accent2:#8d6c50;
+    --line:#e4dcd3; --bg:#ffffff; --bg2:#faf7f3; --chip:#f4eee7;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:"Segoe UI","Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   .wrap{max-width:860px;margin:0 auto;padding:0 22px}
-  header{background:linear-gradient(135deg,#16405e 0%,#1f5f8b 60%,#2a7ab0 100%);color:#fff;padding:52px 0 44px}
+  header{background:linear-gradient(135deg,#503c2e 0%,#72533d 60%,#8d6c50 100%);color:#fff;padding:52px 0 44px}
   header .wrap{display:flex;flex-direction:column;gap:6px}
   h1{font-size:2rem;font-weight:700;letter-spacing:.02em}
   .kanji{font-size:1.05rem;opacity:.92}
@@ -45,6 +45,19 @@
   table.links td:first-child{white-space:nowrap;font-weight:600;color:var(--ink);width:13em}
   footer{background:var(--bg2);border-top:1px solid var(--line);margin-top:20px;padding:18px 0 26px;font-size:.85rem;color:var(--sub)}
   @media(min-width:640px){ul.interests{grid-template-columns:1fr 1fr}}
+
+  .member-group-heading{font-size:1.02rem;color:var(--ink);margin:24px 0 12px}
+  .member-group-heading span{display:inline-block;font-size:.88rem;font-weight:500;margin-left:8px;color:var(--sub)}
+  .member-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:18px}
+  .member-card{border:1px solid var(--line);border-top:3px solid var(--accent2);background:var(--bg2);padding:18px;border-radius:8px;min-width:0;overflow-wrap:anywhere}
+  .member-card h4{font-size:1.09rem;line-height:1.4;margin-bottom:3px;color:var(--ink)}
+  .member-roman{font-size:.88rem;color:var(--sub);margin-bottom:12px}
+  .member-affiliation{font-size:.87rem;color:var(--ink);margin-bottom:13px}
+  .member-affiliation span,.member-theme span{display:block;font-size:.83rem;color:var(--sub);margin-top:5px}
+  .member-theme{font-size:.92rem;margin-bottom:10px;color:var(--ink)}
+  .member-theme strong{display:block;color:var(--accent);font-size:.81rem;margin-bottom:4px}
+  .member-links{font-size:.81rem;margin-bottom:0}
+  @media(max-width:639px){.member-grid{grid-template-columns:1fr}.member-card{padding:16px}h2 .ja{display:block;margin-left:0;margin-top:3px}table.links{table-layout:fixed}table.links td:first-child{width:34%;white-space:normal}table.links td{overflow-wrap:anywhere}}
 </style>
 </head>
 <body>
@@ -56,6 +69,7 @@
     <div class="role">Professor, School of Rehabilitation Sciences (Speech-Language-Hearing Therapy),<br>Health Sciences University of Hokkaido, Japan</div>
     <div class="role-ja">北海道医療大学 リハビリテーション科学部 言語聴覚療法学科 教授／博士（医学）・言語聴覚士</div>
     <div class="idrow">
+      <a href="#lab">Research Team / 研究メンバー</a>
       <a href="https://orcid.org/0000-0003-0277-9866" target="_blank" rel="noopener">ORCID 0000-0003-0277-9866</a>
       <a href="https://researchmap.jp/sns9841714?lang=en" target="_blank" rel="noopener">researchmap (EN)</a>
       <a href="https://researchmap.jp/sns9841714" target="_blank" rel="noopener">researchmap (日本語)</a>
@@ -217,13 +231,54 @@
 </section>
 
 <section id="lab">
-  <h2>Lab &amp; Graduate Students<span class="ja">研究室・大学院生</span></h2>
-  <p>As Principal Investigator, I lead a research group at the School of Rehabilitation Sciences, Health Sciences University of Hokkaido. The lab currently hosts graduate students conducting clinical research in swallowing and speech sciences:</p>
-  <ul class="interests">
-    <li><b>Doctoral student (D2)</b> — respiratory–swallow coordination and cough function in older adults</li>
-    <li><b>Master's student (M1)</b> — peripheral electrical stimulation and elicitation of the swallowing reflex</li>
-    <li><b>Alumni</b> — graduates whose research addressed swallowing and posture, and swallowing ultrasonography; both remain active in clinical and research careers</li>
-  </ul>
+  <h2>Research Team &amp; Collaborators<span class="ja">研究メンバー・共同研究者</span></h2>
+  <p>Our research brings together faculty collaborators in speech, language and hearing sciences and graduate students working on swallowing and respiratory function.</p>
+  <div class="ja-block" lang="ja">言語聴覚療法に関わる研究で連携する教員と、永見が研究指導を行っている大学院生を紹介します。</div>
+
+  <h3 class="member-group-heading">Collaborators <span lang="ja">共同研究者</span></h3>
+  <div class="member-grid">
+    <article class="member-card" lang="ja">
+      <h4>若松 千裕</h4>
+      <p class="member-roman" lang="en">Kazuhiro Wakamatsu</p>
+      <p class="member-affiliation">北海道医療大学 リハビリテーション科学部 言語聴覚療法学科<span lang="en">Department of Speech-Language-Hearing Therapy, School of Rehabilitation Sciences, Health Sciences University of Hokkaido</span></p>
+      <p class="member-theme"><strong>研究テーマ</strong>失語症の症状解析・治療法の開発と、日常生活のコミュニケーション支援<span lang="en">Aphasia symptom analysis, treatment development, and support for communication in daily life.</span></p>
+      <p class="member-links"><a href="https://sites.google.com/hoku-iryo-u.ac.jp/riha-kyouin/list/%E8%A8%80%E8%AA%9E%E8%81%B4%E8%A6%9A%E7%99%82%E6%B3%95%E5%AD%A6%E7%A7%91" target="_blank" rel="noopener">大学教員紹介 / Faculty profile</a> ／ <a href="https://researchmap.jp/kazuhiro-wakamatsu" target="_blank" rel="noopener">researchmap</a></p>
+    </article>
+    <article class="member-card" lang="ja">
+      <h4>前田 秀彦</h4>
+      <p class="member-roman" lang="en">Hidehiko Maeda</p>
+      <p class="member-affiliation">北海道医療大学 リハビリテーション科学部 言語聴覚療法学科<span lang="en">Department of Speech-Language-Hearing Therapy, School of Rehabilitation Sciences, Health Sciences University of Hokkaido</span></p>
+      <p class="member-theme"><strong>研究テーマ</strong>聴性定常反応（ASSR）による聴力評価と、成人の聞き取り困難症（LiD）の評価<span lang="en">Hearing assessment using auditory steady-state responses (ASSR) and evaluation of listening difficulties (LiD) in adults.</span></p>
+      <p class="member-links"><a href="https://sites.google.com/hoku-iryo-u.ac.jp/riha-kyouin/list/%E8%A8%80%E8%AA%9E%E8%81%B4%E8%A6%9A%E7%99%82%E6%B3%95%E5%AD%A6%E7%A7%91" target="_blank" rel="noopener">大学教員紹介 / Faculty profile</a> ／ <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-26K14245/" target="_blank" rel="noopener">科研費研究課題 / KAKEN</a></p>
+    </article>
+    <article class="member-card" lang="ja">
+      <h4>小林 健史</h4>
+      <p class="member-roman" lang="en">Kenji Kobayashi</p>
+      <p class="member-affiliation">北海道医療大学 リハビリテーション科学部 言語聴覚療法学科<span lang="en">Department of Speech-Language-Hearing Therapy, School of Rehabilitation Sciences, Health Sciences University of Hokkaido</span></p>
+      <p class="member-theme"><strong>研究テーマ</strong>発達性言語症の子どもの動作語の評価と、ビデオフィードバックを用いた指導法の開発<span lang="en">Action-verb assessment in children with developmental language disorder and development of support methods using video feedback.</span></p>
+      <p class="member-links"><a href="https://sites.google.com/hoku-iryo-u.ac.jp/riha-kyouin/list/%E8%A8%80%E8%AA%9E%E8%81%B4%E8%A6%9A%E7%99%82%E6%B3%95%E5%AD%A6%E7%A7%91" target="_blank" rel="noopener">大学教員紹介 / Faculty profile</a> ／ <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-26K06235/" target="_blank" rel="noopener">科研費研究課題 / KAKEN</a></p>
+    </article>
+  </div>
+
+  <h3 class="member-group-heading">Graduate Students <span lang="ja">大学院生</span></h3>
+  <div class="member-grid">
+    <article class="member-card" lang="ja">
+      <h4>秋枝 克昌</h4>
+      <p class="member-roman" lang="en">Katsumasa Akieda</p>
+      <p class="member-affiliation">北海道医療大学大学院 リハビリテーション科学研究科 博士後期課程<span lang="en">Doctoral program, Graduate School of Rehabilitation Sciences, Health Sciences University of Hokkaido</span></p>
+      <p class="member-theme"><strong>研究テーマ</strong>摂食嚥下機能・咳嗽機能の評価とリハビリテーション<span lang="en">Assessment and rehabilitation of swallowing and cough function.</span></p>
+      
+    </article>
+    <article class="member-card" lang="ja">
+      <h4>石川 慎二朗</h4>
+      
+      <p class="member-affiliation">北海道医療大学大学院 リハビリテーション科学研究科<span lang="en">Graduate School of Rehabilitation Sciences, Health Sciences University of Hokkaido</span></p>
+      <p class="member-theme"><strong>研究テーマ</strong>末梢磁気刺激を用いた嚥下関連筋への介入<span lang="en">Peripheral magnetic stimulation of swallowing-related muscles.</span></p>
+      
+    </article>
+  </div>
+
+  <p class="note" lang="ja">修了生も、嚥下と姿勢、嚥下超音波の研究などを通じて、臨床・研究の場で活動しています。</p>
   <p class="note">Graduate students present at the university's research progress meetings each semester. We also collaborate with engineering and clinical research groups across Japan on medical device development and AI-assisted analysis of clinical data.</p>
   <p><b>Featured:</b> Our lab was introduced in the newsletter of the Japan Geriatric Therapy Society — <a href="https://jgts.or.jp/news/newsletter08/" target="_blank" rel="noopener">JGTS News Letter No. 08 (June 2026)</a> (<a href="https://jgts.or.jp/wp/wp-content/uploads/2026/06/8280f90a3e52a418628d353f6d843ec4.pdf" target="_blank" rel="noopener">PDF</a>), lab profile &ldquo;研究室紹介：永見研究室&rdquo; with photographs of lab members and collaborators. I also serve on the society's Public Relations Committee.</p>
   <div class="ja-block">研究室（PI: 永見）では大学院生（博士課程・修士課程）が嚥下・音声の臨床研究に取り組んでいます。修了生（嚥下と姿勢・嚥下エコーの研究）も臨床・研究の場で活躍中です。学外の工学系・臨床系グループとも医療機器開発・AI解析で共同研究を行っています。<b><a href="https://jgts.or.jp/news/newsletter08/" target="_blank" rel="noopener">日本老年療法学会ニュースレター No.08（2026年6月）</a>に研究室紹介が掲載されました</b>（<a href="https://jgts.or.jp/wp/wp-content/uploads/2026/06/8280f90a3e52a418628d353f6d843ec4.pdf" target="_blank" rel="noopener">PDF直接リンク</a>）。</div>
@@ -246,8 +301,9 @@
 </main>
 
 <footer>
-  <div class="wrap">© 2026 Shinsuke Nagami — Last updated: October 14, 2026. Publication data sourced from <a href="https://researchmap.jp/sns9841714" target="_blank" rel="noopener">researchmap</a>.</div>
+  <div class="wrap">© 2026 Shinsuke Nagami — Last updated: October 23, 2026. Publication data sourced from <a href="https://researchmap.jp/sns9841714" target="_blank" rel="noopener">researchmap</a>.</div>
 </footer>
 
 </body>
 </html>
+
